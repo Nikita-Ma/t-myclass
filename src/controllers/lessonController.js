@@ -119,7 +119,7 @@ const getLesson = async (req, res) => {
 
         if (date.split(',').length === 1) {
             const teachersData  = await db.query(
-                '  SELECT *\n' +
+                '  SELECT lesson_id, teacher_id,  date, title, status, name\n' +
                 '  FROM lesson_teachers\n' +
                 '  INNER JOIN lessons ON lesson_teachers.lesson_id = lessons.id\n' +
                 '  INNER JOIN teachers ON lesson_teachers.teacher_id = teachers.id\n' +
@@ -130,17 +130,18 @@ const getLesson = async (req, res) => {
 
             const studentsData = await db.query(
                 '\n' +
-                '  SELECT *\n' +
+                '  SELECT  lesson_id, student_id, visit, date, status, name\n' +
                 '  FROM lesson_students\n' +
                 '  INNER JOIN lessons ON lesson_students.lesson_id = lessons.id\n' +
-                '  INNER JOIN students ON lesson_students.lesson_id = students.id\n' +
+                '  INNER JOIN students ON lesson_students.student_id = students.id\n' +
                 '  WHERE lessons.date = $1'
                 ,
                 [date.split(',')[0]]
             )
 
             const readyData = configObject(teachersData.rows, studentsData.rows)
-            console.log(readyData)
+            console.log('============================')
+            return res.send(readyData)
         }
 
     }

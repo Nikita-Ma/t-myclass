@@ -10,6 +10,8 @@ const connectDB = require("./utils/connectDB");
 
 // connect DB
 connectDB()
+
+// routes
 app.use('/', lessonRoute)
 
 
