@@ -1,6 +1,6 @@
 # T-MyRoom
 
-## How improve
+## How to improve
 
 * install eslint / prettier / husky / editorconfig
 * write docs
